@@ -8,7 +8,7 @@
 
 void swap(int *a, int *b)
 {
-	int temp = *a;
+	int temp = *a; 
 	*a = *b;
 	*b = temp;
 }
@@ -24,28 +24,28 @@ void swap(int *a, int *b)
 
 int partition(int *array, int low, int high, size_t size)
 {
-	int pivot = array[high];
-	int i = low - 1;
-	int j;
+	int pivot = array[high]; //pivot = dernier élément
+	int i = low - 1; //index plus petit élément / position correcte du pivot
+	int j; // variable pour boucle
 
-	for (j = low; j <= high - 1; j++)
+	for (j = low; j <= high - 1; j++) // parcourt tous les éléments sauf le pivot
 	{
-		if (array[j] <= pivot)
+		if (array[j] <= pivot) // si élément <= au pivot
 		{
-			i++;
-			if (i != j)
+			i++; // incrémentation index du plus petit
+			if (i != j) // si les index sont différent
 			{
-				swap(&array[i], &array[j]);
-				print_array(array, size);
+				swap(&array[i], &array[j]); // échange les éléments
+				print_array(array, size); // affiche le tableau 
 			}
 		}
 	}
-	if (i + 1 != high)
+	if (i + 1 != high) //si le pivot n'est pas déjà à sa place
 	{
-		swap(&array[i + 1], &array[high]);
-		print_array(array, size);
+		swap(&array[i + 1], &array[high]); // place le pivot à sa position finale
+		print_array(array, size); //affiche le tableau
 	}
-	return (i + 1);
+	return (i + 1); // retourne la position finale du pivot
 }
 
 /**
@@ -59,12 +59,12 @@ int partition(int *array, int low, int high, size_t size)
 
 void quick_sort_recursive(int *array, int low, int high, size_t size)
 {
-	if (low < high)
+	if (low < high) // condition d'arrêt : il faut 2 éléments min
 	{
-		int pivot_index = partition(array, low, high, size);
+		int pivot_index = partition(array, low, high, size); // partitionne et obtient l'index du pivot
 
-		quick_sort_recursive(array, low, pivot_index - 1, size);
-		quick_sort_recursive(array, pivot_index + 1, high, size);
+		quick_sort_recursive(array, low, pivot_index - 1, size); //trie la partie gauche éléments < pivot
+		quick_sort_recursive(array, pivot_index + 1, high, size); // trie la partie droite élément > pivot
 	}
 }
 
@@ -77,8 +77,8 @@ void quick_sort_recursive(int *array, int low, int high, size_t size)
 
 void quick_sort(int *array, size_t size)
 {
-	if (array == NULL || size < 2)
+	if (array == NULL || size < 2) // vérifie les cas de base
 		return;
 
-	quick_sort_recursive(array, 0, size - 1, size);
+	quick_sort_recursive(array, 0, size - 1, size); // lance le tri récursif
 }
